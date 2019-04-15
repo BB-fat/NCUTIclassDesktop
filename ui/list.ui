@@ -6,14 +6,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>570</width>
+    <height>306</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>课程列表-iclassDesktop</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QLabel" name="label_2">
+     <property name="text">
+      <string>双击课程进入课件列表</string>
+     </property>
+    </widget>
+   </item>
    <item>
     <widget class="QListWidget" name="listWidget">
      <property name="font">
@@ -31,102 +38,17 @@
        <string>新建项目</string>
       </property>
      </item>
-     <item>
-      <property name="text">
-       <string>新建项目</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>新建项目</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>新建项目</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>新建项目</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>新建项目</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>新建项目</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>新建项目</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>新建项目</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>新建项目</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>新建项目</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>新建项目</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>新建项目</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>新建项目</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>新建项目</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>新建项目</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>新建项目</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>新建项目</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>新建项目</string>
-      </property>
-     </item>
     </widget>
    </item>
    <item>
-    <widget class="QDialogButtonBox" name="buttonBox">
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Close|QDialogButtonBox::Save</set>
+    <widget class="QLabel" name="label">
+     <property name="font">
+      <font>
+       <pointsize>7</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Developed by BBfat</string>
      </property>
     </widget>
    </item>

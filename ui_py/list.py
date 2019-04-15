@@ -12,9 +12,12 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(600, 300)
+        Form.resize(570, 306)
         self.verticalLayout = QtWidgets.QVBoxLayout(Form)
         self.verticalLayout.setObjectName("verticalLayout")
+        self.label_2 = QtWidgets.QLabel(Form)
+        self.label_2.setObjectName("label_2")
+        self.verticalLayout.addWidget(self.label_2)
         self.listWidget = QtWidgets.QListWidget(Form)
         font = QtGui.QFont()
         font.setPointSize(15)
@@ -24,10 +27,12 @@ class Ui_Form(object):
             item = QtWidgets.QListWidgetItem()
             self.listWidget.addItem(item)
         self.verticalLayout.addWidget(self.listWidget)
-        self.buttonBox = QtWidgets.QDialogButtonBox(Form)
-        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Close|QtWidgets.QDialogButtonBox.Save)
-        self.buttonBox.setObjectName("buttonBox")
-        self.verticalLayout.addWidget(self.buttonBox)
+        self.label = QtWidgets.QLabel(Form)
+        font = QtGui.QFont()
+        font.setPointSize(7)
+        self.label.setFont(font)
+        self.label.setObjectName("label")
+        self.verticalLayout.addWidget(self.label)
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -35,11 +40,13 @@ class Ui_Form(object):
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "课程列表-iclassDesktop"))
+        self.label_2.setText(_translate("Form", "双击课程进入课件列表(请耐心等待)"))
         __sortingEnabled = self.listWidget.isSortingEnabled()
         self.listWidget.setSortingEnabled(False)
         for i in range(len(self.courseList)):
             item = self.listWidget.item(i)
             item.setText(_translate("Form", self.courseList[i]['course_name']))
         self.listWidget.setSortingEnabled(__sortingEnabled)
+        self.label.setText(_translate("Form", "Developed by BBfat"))
 
 
