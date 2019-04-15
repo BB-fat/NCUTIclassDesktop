@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import QWidget,QMessageBox
 
 from utils.iclass import *
-from ui_py import login,list,confirm
+from ui_py import login,list,confirm,coursewarelist
 from threading import Thread
 
 class myAPP(QWidget,login.Ui_Form):
@@ -33,10 +33,26 @@ class listPage(QWidget,list.Ui_Form):
     def clickCourse(self,item):
         for course in self.courseList:
             if course['course_name']==item.text():
-                self.courseWareList = getCourseWareList(course['course_code'])
+                self.coursewareList = getCoursewareList(course['course_code'])
                 break
-        if self.courseWareList == None:
+        if self.coursewareList == None:
             self.confirmBox = confirm.confirmBox('亲', '抱歉，暂无课件！')
             self.confirmBox.show()
         else:
-            pass
+            print(self.coursewareList)
+            self.hide()
+            self.downloadPage=downloadPage(self.coursewareList,self)
+            self.downloadPage.show()
+
+
+class downloadPage(QWidget,coursewarelist.Ui_Form):
+    def __init__(self,coursewareList,father):
+        self.father=father
+        self.coursewareList=coursewareList
+        super(QWidget,self).__init__()
+        self.setupUi(self)
+        self.pushButton_2.clicked.connect(self.showFather)
+
+    def showFather(self):
+        self.close()
+        self.father.show()

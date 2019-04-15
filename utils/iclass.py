@@ -13,7 +13,7 @@ def getCourseList(uid):
     return res['data']
 
 
-def getCourseWareList(courseCode=None):
+def getCoursewareList(courseCode=None):
     data = {
         'code' :courseCode
     }
