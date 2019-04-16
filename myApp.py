@@ -1,8 +1,7 @@
-from PyQt5.QtWidgets import QWidget,QMessageBox
+from PyQt5.QtWidgets import QWidget,QMessageBox,QFileDialog
 
 from utils.iclass import *
 from ui_py import login,list,confirm,coursewarelist
-from threading import Thread
 
 class myAPP(QWidget,login.Ui_Form):
     def __init__(self):
@@ -39,7 +38,6 @@ class listPage(QWidget,list.Ui_Form):
             self.confirmBox = confirm.confirmBox('亲', '抱歉，暂无课件！')
             self.confirmBox.show()
         else:
-            print(self.coursewareList)
             self.hide()
             self.downloadPage=downloadPage(self.coursewareList,self)
             self.downloadPage.show()
@@ -52,7 +50,27 @@ class downloadPage(QWidget,coursewarelist.Ui_Form):
         super(QWidget,self).__init__()
         self.setupUi(self)
         self.pushButton_2.clicked.connect(self.showFather)
+        self.pushButton.clicked.connect(self.download)
+        self.pushButton_3.clicked.connect(self.downloadAll)
 
     def showFather(self):
         self.close()
         self.father.show()
+
+    def download(self):
+        downloadList=[]
+        for i in range(len(self.coursewareList)):
+            if self.treeWidget.topLevelItem(i).checkState(0)!=0:
+                downloadList.append(self.coursewareList[i])
+        save_path=QFileDialog.getExistingDirectory(self,"选择保存位置",'.')
+        if save_path=='':
+            return
+        downloadCourseware(downloadList,save_path)
+        QMessageBox.information(self,"亲","下载完成！",QMessageBox.Ok)
+
+    def downloadAll(self):
+        save_path=QFileDialog.getExistingDirectory(self,"选择保存位置",'.')
+        if save_path=='':
+            return
+        downloadCourseware(self.coursewareList,save_path)
+        QMessageBox.information(self,"亲","下载完成！",QMessageBox.Ok)

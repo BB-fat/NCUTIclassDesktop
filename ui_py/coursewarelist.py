@@ -7,7 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QWidget,QApplication,QCheckBox
+from PyQt5.QtWidgets import QWidget,QApplication,QHeaderView
 from PyQt5.QtCore import Qt
 import sys
 
@@ -15,10 +15,11 @@ import sys
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(600, 300)
+        Form.resize(400, 300)
         self.verticalLayout = QtWidgets.QVBoxLayout(Form)
         self.verticalLayout.setObjectName("verticalLayout")
         self.treeWidget = QtWidgets.QTreeWidget(Form)
+        self.treeWidget.header().setSectionResizeMode(QHeaderView.ResizeToContents)
         self.treeWidget.setTextElideMode(QtCore.Qt.ElideRight)
         self.treeWidget.setWordWrap(False)
         self.treeWidget.setHeaderHidden(False)
@@ -33,6 +34,9 @@ class Ui_Form(object):
         self.horizontalLayout.addWidget(self.pushButton_2)
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
+        self.pushButton_3 = QtWidgets.QPushButton(Form)
+        self.pushButton_3.setObjectName("pushButton_3")
+        self.horizontalLayout.addWidget(self.pushButton_3)
         self.pushButton = QtWidgets.QPushButton(Form)
         self.pushButton.setObjectName("pushButton")
         self.horizontalLayout.addWidget(self.pushButton)
@@ -61,6 +65,7 @@ class Ui_Form(object):
             self.treeWidget.topLevelItem(i).setText(2, _translate("Form", str(self.coursewareList[i]['size'])[:-5]+'.'+str(self.coursewareList[i]['size'])[-5:][:2]+'M'))
         self.treeWidget.setSortingEnabled(__sortingEnabled)
         self.pushButton_2.setText(_translate("Form", "Back"))
+        self.pushButton_3.setText(_translate("Form", "downloadall"))
         self.pushButton.setText(_translate("Form", "Download"))
         self.label.setText(_translate("Form", "Developed by BBfat"))
 
