@@ -53,7 +53,7 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "课件列表"))
+        Form.setWindowTitle(_translate("Form", "课件列表-iclassDesktop"))
         self.treeWidget.headerItem().setText(0, _translate("Form", "选择"))
         self.treeWidget.headerItem().setText(1, _translate("Form", "文件名"))
         self.treeWidget.headerItem().setText(2, _translate("Form", "文件大小"))

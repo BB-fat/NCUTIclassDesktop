@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import QWidget,QMessageBox,QFileDialog
 
-from utils.iclass import *
-from ui_py import login,list,confirm,coursewarelist
+from ui_py import login,list,confirm,coursewarelist,loading
+from threads import *
 
 class myAPP(QWidget,login.Ui_Form):
     def __init__(self):
@@ -22,6 +22,9 @@ class myAPP(QWidget,login.Ui_Form):
 
 
 class listPage(QWidget,list.Ui_Form):
+    '''
+    课程列表页面
+    '''
     def __init__(self,courseList):
         super(QWidget,self).__init__()
         self.courseList=courseList
@@ -29,21 +32,31 @@ class listPage(QWidget,list.Ui_Form):
         self.listWidget.itemDoubleClicked['QListWidgetItem*'].connect(self.clickCourse)
 
     def clickCourse(self,item):
-        for course in self.courseList:
-            if course['course_name']==item.text():
-                self.coursewareList = getCoursewareList(course['course_code'])
-                break
-        if self.coursewareList == None:
-            self.confirmBox = confirm.confirmBox('亲', '抱歉，暂无课件！')
-            self.confirmBox.show()
-        else:
-            print(self.coursewareList)
-            self.hide()
-            self.downloadPage=downloadPage(self.coursewareList,self)
-            self.downloadPage.show()
+        self.hide()
+        self.loadBox=loading.Loading()
+        self.loadBox.show()
+        self.thread_CoursewareList=ReqCoursewareList(self.courseList,item.text())
+        self.thread_CoursewareList.start()
+        self.thread_CoursewareList.empty.connect(self.showEmpty)
+        self.thread_CoursewareList.finish.connect(self.toDownload)
+
+    def showEmpty(self):
+        self.loadBox.close()
+        self.show()
+        self.confirmBox = confirm.confirmBox('亲', '抱歉，暂无课件！')
+        self.confirmBox.show()
+
+
+    def toDownload(self,coursewareList):
+        self.loadBox.close()
+        self.downloadPage=downloadPage(coursewareList,self)
+        self.downloadPage.show()
 
 
 class downloadPage(QWidget,coursewarelist.Ui_Form):
+    '''
+    下载页面
+    '''
     def __init__(self,coursewareList,father):
         self.father=father
         self.coursewareList=coursewareList
@@ -65,12 +78,17 @@ class downloadPage(QWidget,coursewarelist.Ui_Form):
         save_path=QFileDialog.getExistingDirectory(self,"选择保存位置",'.')
         if save_path=='':
             return
-        downloadCourseware(downloadList,save_path)
-        QMessageBox.information(self,"亲","下载完成！",QMessageBox.Ok)
+        self.thread_download=DownloadCourseware(downloadList,save_path)
+        self.thread_download.start()
+        self.thread_download.finish.connect(self.downloadFinish)
 
     def downloadAll(self):
         save_path=QFileDialog.getExistingDirectory(self,"选择保存位置",'.')
         if save_path=='':
             return
-        downloadCourseware(self.coursewareList,save_path)
+        self.thread_download=DownloadCourseware(self.coursewareList,save_path)
+        self.thread_download.start()
+        self.thread_download.finish.connect(self.downloadFinish)
+
+    def downloadFinish(self):
         QMessageBox.information(self,"亲","下载完成！",QMessageBox.Ok)
