@@ -44,11 +44,10 @@ class Ui_Form(object):
         self.buttonBox.rejected.connect(Form.close)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
-        # self.buttonBox.accepted.connect(self.login)
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "登陆-iclassDesktop"))
-        self.label.setText(_translate("Form", "欢迎使用iclassDesktop，使用本程序需连接校网"))
+        self.label.setText(_translate("Form", "欢迎使用iclassDesktop1.0，使用本程序需连接校网"))
         self.Label.setText(_translate("Form", "学号："))
         self.label_2.setText(_translate("Form", "Developed by BBfat"))

@@ -7,7 +7,6 @@ class myAPP(QWidget,login.Ui_Form):
     def __init__(self):
         super(QWidget,self).__init__()
         self.setupUi(self)
-        # 连接登陆确认函数
         self.buttonBox.accepted.connect(self.login)
 
     def login(self):
