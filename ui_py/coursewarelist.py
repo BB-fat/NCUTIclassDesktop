@@ -62,10 +62,11 @@ class Ui_Form(object):
         for i in range(len(self.coursewareList)):
             self.treeWidget.topLevelItem(i).setCheckState(0,Qt.Unchecked)
             self.treeWidget.topLevelItem(i).setText(1, _translate("Form", self.coursewareList[i]['file_name']))
-            self.treeWidget.topLevelItem(i).setText(2, _translate("Form", str(self.coursewareList[i]['size'])[:-5]+'.'+str(self.coursewareList[i]['size'])[-5:][:2]+'M'))
+            size=self.coursewareList[i]['size']/1000000
+            self.treeWidget.topLevelItem(i).setText(2, _translate("Form", '%.2fM'%size))
         self.treeWidget.setSortingEnabled(__sortingEnabled)
         self.pushButton_2.setText(_translate("Form", "Back"))
-        self.pushButton_3.setText(_translate("Form", "downloadall"))
+        self.pushButton_3.setText(_translate("Form", "Downloadall"))
         self.pushButton.setText(_translate("Form", "Download"))
         self.label.setText(_translate("Form", "Developed by BBfat"))
 

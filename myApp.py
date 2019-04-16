@@ -38,6 +38,7 @@ class listPage(QWidget,list.Ui_Form):
             self.confirmBox = confirm.confirmBox('亲', '抱歉，暂无课件！')
             self.confirmBox.show()
         else:
+            print(self.coursewareList)
             self.hide()
             self.downloadPage=downloadPage(self.coursewareList,self)
             self.downloadPage.show()
