@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import QWidget,QMessageBox,QFileDialog
 
 from ui_py import login,list,confirm,coursewarelist,loading
-from threads import *
+from utils.threads import *
 
 class myAPP(QWidget,login.Ui_Form):
     def __init__(self):
