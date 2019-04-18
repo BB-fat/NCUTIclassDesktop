@@ -79,6 +79,7 @@ class downloadPage(QWidget,coursewarelist.Ui_Form):
         if save_path=='':
             return
         self.processBar=processBar.ProcessBar()
+        self.processBar.pushButton.clicked.connect(self.stopDownload)
         self.processBar.show()
         self.thread_download=DownloadCourseware(downloadList,save_path)
         self.thread_download.start()
@@ -89,9 +90,13 @@ class downloadPage(QWidget,coursewarelist.Ui_Form):
         save_path=QFileDialog.getExistingDirectory(self,"选择保存位置",'.')
         if save_path=='':
             return
+        self.processBar=processBar.ProcessBar()
+        self.processBar.pushButton.clicked.connect(self.stopDownload)
+        self.processBar.show()
         self.thread_download=DownloadCourseware(self.coursewareList,save_path)
         self.thread_download.start()
         self.thread_download.finish.connect(self.downloadFinish)
+        self.thread_download.process.connect(self.downloadProcess)
 
     def downloadFinish(self):
         self.processBar.close()
@@ -99,3 +104,7 @@ class downloadPage(QWidget,coursewarelist.Ui_Form):
 
     def downloadProcess(self,size):
         self.processBar.progressBar.setValue(size)
+
+    def stopDownload(self):
+        self.processBar.close()
+        self.thread_download.quit()

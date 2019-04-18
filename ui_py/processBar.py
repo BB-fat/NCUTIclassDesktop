@@ -30,7 +30,6 @@ class Ui_Form(object):
         self.verticalLayout.addLayout(self.horizontalLayout)
 
         self.retranslateUi(Form)
-        self.pushButton.clicked.connect(Form.close)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
     def retranslateUi(self, Form):
