@@ -32,18 +32,6 @@ def getCoursewareList(courseCode=None):
         wareList.append(tempDict)
     return wareList
 
-def downloadCourseware(downloadList,save_path):
-    for courseware in downloadList:
-        if courseware['type']!='dir':
-            data={
-                'cidReset':True,
-                'cidReq':courseware['coursecode']
-            }
-            res=requests.get('http://iclass.ncut.edu.cn/iclass/netclass/backends/download_api.php?url='+courseware['url'],params=data).content
-            with open(save_path+'/'+courseware['file_name'],'wb') as f:
-                f.write(res)
-        else:
-            pass
 
 
 if __name__=="__main__":

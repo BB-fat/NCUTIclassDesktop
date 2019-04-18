@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import QWidget,QMessageBox,QFileDialog
 
-from ui_py import login,list,confirm,coursewarelist,loading
+from ui_py import login,list,confirm,coursewarelist,loading,processBar
 from utils.threads import *
 
 class myAPP(QWidget,login.Ui_Form):
@@ -78,9 +78,12 @@ class downloadPage(QWidget,coursewarelist.Ui_Form):
         save_path=QFileDialog.getExistingDirectory(self,"选择保存位置",'.')
         if save_path=='':
             return
+        self.processBar=processBar.ProcessBar()
+        self.processBar.show()
         self.thread_download=DownloadCourseware(downloadList,save_path)
         self.thread_download.start()
         self.thread_download.finish.connect(self.downloadFinish)
+        self.thread_download.process.connect(self.downloadProcess)
 
     def downloadAll(self):
         save_path=QFileDialog.getExistingDirectory(self,"选择保存位置",'.')
@@ -91,4 +94,8 @@ class downloadPage(QWidget,coursewarelist.Ui_Form):
         self.thread_download.finish.connect(self.downloadFinish)
 
     def downloadFinish(self):
+        self.processBar.close()
         QMessageBox.information(self,"亲","下载完成！",QMessageBox.Ok)
+
+    def downloadProcess(self,size):
+        self.processBar.progressBar.setValue(size)

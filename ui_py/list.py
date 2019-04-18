@@ -7,7 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+from settings import *
 
 class Ui_Form(object):
     def setupUi(self, Form):
@@ -39,7 +39,7 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "课程列表-iclassDesktop"))
+        Form.setWindowTitle(_translate("Form", "课程列表-iclassDesktop"+version))
         self.label_2.setText(_translate("Form", "双击课程进入课件列表(请耐心等待)"))
         __sortingEnabled = self.listWidget.isSortingEnabled()
         self.listWidget.setSortingEnabled(False)

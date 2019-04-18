@@ -10,6 +10,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QWidget,QApplication,QHeaderView
 from PyQt5.QtCore import Qt
 import sys
+from settings import *
 
 
 class Ui_Form(object):
@@ -53,7 +54,7 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "课件列表-iclassDesktop"))
+        Form.setWindowTitle(_translate("Form", "课件列表-iclassDesktop"+version))
         self.treeWidget.headerItem().setText(0, _translate("Form", "选择"))
         self.treeWidget.headerItem().setText(1, _translate("Form", "文件名"))
         self.treeWidget.headerItem().setText(2, _translate("Form", "文件大小"))

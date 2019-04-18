@@ -7,7 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+from settings import *
 
 class Ui_Form(object):
     def setupUi(self, Form):
@@ -47,7 +47,7 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "登陆-iclassDesktop"))
-        self.label.setText(_translate("Form", "欢迎使用iclassDesktop1.1，使用本程序需连接校网"))
+        Form.setWindowTitle(_translate("Form", "登陆-iclassDesktop"+version))
+        self.label.setText(_translate("Form", "欢迎使用iclassDesktop"+version+"，使用本程序需连接校网"))
         self.Label.setText(_translate("Form", "学号："))
         self.label_2.setText(_translate("Form", "Developed by BBfat"))
