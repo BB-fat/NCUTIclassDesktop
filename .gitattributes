@@ -1,1 +1,2 @@
 *.ui linguist-language=Python3
+*.py linguist-language=Python3
